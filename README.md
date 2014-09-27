@@ -36,7 +36,7 @@ Getting Started
 --------------- 
 To build/run LevelEditor:
 
-1. Open the solution Leveleditor\build\LevelEditor.vs2010.sln in Visual Studio 2010 or later.
+1. Open the solution build\LevelEditor.vs2010.sln in Visual Studio 2010 or later.
 1. Change the configuration to Release and then build LevelEditor.
 1. Navigate to the directory in which LevelEditor is built and double-click the file LevelEditor.exe to start LevelEditor.
 1. After LevelEditor starts, select Edit->Preferences and use the Preferences dialog to set the resource root to a location that contains a few ATGI or Collada files and then restart LevelEditor. (Restart LevelEditor just in case).
