@@ -225,11 +225,6 @@
     <Compile Include="Controls\Adaptable\ContextMenuAdapter.cs" />
     <Compile Include="Controls\Adaptable\ControlAdapter.cs" />
     <Compile Include="Controls\Adaptable\CoordinateAxisAdapter.cs" />
-    <Compile Include="Controls\Adaptable\D2dAdaptableControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Adaptable\D2dAnnotationAdapter.cs" />
-    <Compile Include="Controls\Adaptable\D2dGridAdapter.cs" />
     <Compile Include="Controls\Adaptable\DiagramExpander.cs" />
     <Compile Include="Controls\Adaptable\DiagramLabel.cs" />
     <Compile Include="Controls\Adaptable\DiagramPin.cs" />
@@ -341,9 +336,6 @@
     <Compile Include="Controls\CustomColorTable.cs" />
     <Compile Include="Controls\CustomToolStripRenderer.cs" />
     <Compile Include="Controls\DataBoundListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Direct2DControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ErrorDialog.cs">
@@ -529,17 +521,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ThumbnailControlItem.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dDefaultTimelineRenderer.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dMoveManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dScaleManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dScrubberManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dSelectionManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dSnapManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dSplitManipulator.cs" />
-    <Compile Include="Controls\Timelines\Direct2D\D2dTimelineControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Timelines\Direct2D\D2dTimelineRenderer.cs" />
     <Compile Include="Controls\Timelines\Gdi\DefaultTimelineRenderer.cs" />
     <Compile Include="Controls\Timelines\Gdi\MoveManipulator.cs" />
     <Compile Include="Controls\Timelines\Gdi\ScaleManipulator.cs" />
