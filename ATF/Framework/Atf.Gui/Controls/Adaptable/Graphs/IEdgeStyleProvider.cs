@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Drawing;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 
 namespace Sce.Atf.Controls.Adaptable.Graphs
 {
@@ -38,6 +38,6 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// <param name="worldOffset">Current world offset of renderer when drawing this edge</param>
         /// <param name="g">Graphics object</param>
         /// <returns>Edge data to plot for</returns>
-        IEnumerable<EdgeStyleData> GetData(DiagramRenderer render, Point worldOffset, D2dGraphics g);
+        IEnumerable<EdgeStyleData> GetData(DiagramRenderer render, Point worldOffset, IAtfGraphics g);
     }
 }

@@ -20,6 +20,9 @@ The following LevelEditor features help you construct game levels efficiently an
 
 ![LevelEditor Design View](https://raw.githubusercontent.com/wiki/SonyWWS/LevelEditor/images/LE_Lights.png?raw=true "LevelEditor Design View")
 
+NOTE
+====
+In process of stripping out Direct2D so that it can be replaced with a platform-independent graphics wrapper. Then seperate branches will be made for Direct2D and OpenGL.
 
 LevelEditor Minimal System Requirements
 ---------------------------------------

@@ -2,7 +2,7 @@
 
 using System;
 using System.Drawing;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 
 namespace Sce.Atf.DirectWrite
 {
@@ -53,11 +53,11 @@ namespace Sce.Atf.DirectWrite
 
         /// <summary>
         /// Gets or sets formatted text</summary>
-        public D2dTextLayout TextLayout { get; set; }
+        public IAtfTextLayout TextLayout { get; set; }
 
         /// <summary>
         /// Gets or sets text format object used for text layout</summary>
-        public D2dTextFormat TextFormat { get; set; }
+        public IAtfTextFormat TextFormat { get; set; }
           
         /// <summary>
         /// Gets or sets starting position of text selected for editing</summary>
@@ -563,7 +563,7 @@ namespace Sce.Atf.DirectWrite
 
         private void RecreateLayout(string text)
         {
-            var textLayout = D2dFactory.CreateTextLayout(text, TextFormat, TextLayout.LayoutWidth, TextLayout.LayoutHeight);
+            var textLayout = AtfDrawingFactory.CreateTextLayout(text, TextFormat, TextLayout.LayoutWidth, TextLayout.LayoutHeight);
             if (TextFormat.Underlined)
                 textLayout.SetUnderline(true, 0, text.Length);
             if (TextFormat.Strikeout)

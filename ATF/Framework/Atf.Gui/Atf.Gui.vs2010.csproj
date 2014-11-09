@@ -309,6 +309,10 @@
     </Compile>
     <Compile Include="Dom\Template.cs" />
     <Compile Include="Dom\TemplateFolder.cs" />
+    <Compile Include="Drawing\AtfDrawingFactory.cs" />
+    <Compile Include="Drawing\IAtfGraphics.cs" />
+    <Compile Include="Drawing\IAtfTextFormat.cs" />
+    <Compile Include="Drawing\IAtfTextLayout.cs" />
     <Compile Include="EnumUtil.cs" />
     <Compile Include="FileFilterBuilder.cs" />
     <Compile Include="Applications\PropertyEventArgs.cs" />
