@@ -7,7 +7,7 @@ using System.Linq;
 
 using Sce.Atf.VectorMath;
 using Sce.Atf.Adaptation;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 using Sce.Atf.Dom;
 
 
@@ -47,9 +47,9 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// <param name="g">Graphics object</param>
         /// <returns>The data to plot for the edge.</returns>
         /// <remarks>The data is returned in world space</remarks>
-        IEnumerable<EdgeStyleData> IEdgeStyleProvider.GetData(DiagramRenderer render, Point worldOffset, D2dGraphics g)
+        IEnumerable<EdgeStyleData> IEdgeStyleProvider.GetData(DiagramRenderer render, Point worldOffset, IAtfGraphics g)
         {
-            var circuitRender = render as D2dCircuitRenderer<TElement, TWire, TPin>;
+            var circuitRender = render as AtfDrawingCircuitRenderer<TElement, TWire, TPin>;
             var dataPoints = GetGroupPinChainData(circuitRender, worldOffset, g);
             IEnumerable<EdgeStyleData> result = EmptyEnumerable<EdgeStyleData>.Instance;
             if (EdgeStyle ==  EdgeStyle.DirectCurve)
@@ -133,7 +133,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
             public bool IsReal; // true when the data point does not belongs to the internal virtual link
         }
 
-        private IList<GroupPinData> GetGroupPinChainData(D2dCircuitRenderer<TElement, TWire, TPin> circuitRender, Point worldOffset, D2dGraphics g)
+        private IList<GroupPinData> GetGroupPinChainData(AtfDrawingCircuitRenderer<TElement, TWire, TPin> circuitRender, Point worldOffset, IAtfGraphics g)
         {
             var connection = DomNode.Cast<Wire>();
             var dataPoints = new List<GroupPinData>();

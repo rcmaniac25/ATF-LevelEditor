@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 using Sce.Atf.Applications;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 using Sce.Atf.VectorMath;
 
 namespace Sce.Atf.Controls.Adaptable

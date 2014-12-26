@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 using Sce.Atf.Adaptation;
 using Sce.Atf.Applications;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 using Sce.Atf.Dom;
 
 namespace Sce.Atf.Controls.Adaptable.Graphs
@@ -150,7 +150,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
                 if (yMin != int.MaxValue && yMax != int.MinValue)
                 {
                     var transformAdapter = m_control.Cast<ITransformAdapter>();
-                    var yRange = D2dUtil.TransformVector(transformAdapter.Transform, new PointF(yMin, yMax));
+                    var yRange = AtfDrawingUtil.TransformVector(transformAdapter.Transform, new PointF(yMin, yMax));
                     yMin = (int)Math.Min(yRange.X, yRange.Y);
                     yMax = (int)Math.Max(yRange.X, yRange.Y);
                     int width = bounds.Width;

@@ -170,6 +170,7 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\ReferenceCollectionAdapter.cs" />
     <Compile Include="Collections\SortedObservableCollection.cs" />
+    <Compile Include="Controls\Adaptable\AtfDiagramTheme.cs" />
     <Compile Include="Controls\Adaptable\DiagramBorder.cs" />
     <Compile Include="Controls\Adaptable\DiagramDrawingStyle.cs" />
     <Compile Include="Controls\Adaptable\DiagramHitEventArgs.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Controls\Adaptable\DiagramRenderer.cs" />
     <Compile Include="Controls\Adaptable\DiagramScrollBar.cs" />
     <Compile Include="Controls\Adaptable\DiagramTitleBar.cs" />
+    <Compile Include="Controls\Adaptable\Graphs\AtfDrawingGraphRenderer.cs" />
     <Compile Include="Controls\Adaptable\Graphs\BoundaryRoute.cs" />
     <Compile Include="Controls\Adaptable\Graphs\CircuitDefaultStyle.cs" />
     <Compile Include="Controls\Adaptable\Graphs\CircuitGroupInfo.cs" />
@@ -310,7 +312,15 @@
     <Compile Include="Dom\Template.cs" />
     <Compile Include="Dom\TemplateFolder.cs" />
     <Compile Include="Drawing\AtfDrawingFactory.cs" />
+    <Compile Include="Drawing\AtfDrawingResource.cs" />
+    <Compile Include="Drawing\AtfDrawingUtil.cs" />
+    <Compile Include="Drawing\IAtfBitmap.cs" />
+    <Compile Include="Drawing\IAtfBrush.cs" />
     <Compile Include="Drawing\IAtfGraphics.cs" />
+    <Compile Include="Drawing\IAtfLinearGradientBrush.cs" />
+    <Compile Include="Drawing\IAtfResource.cs" />
+    <Compile Include="Drawing\IAtfSolidColorBrush.cs" />
+    <Compile Include="Drawing\IAtfStrokeStyle.cs" />
     <Compile Include="Drawing\IAtfTextFormat.cs" />
     <Compile Include="Drawing\IAtfTextLayout.cs" />
     <Compile Include="EnumUtil.cs" />

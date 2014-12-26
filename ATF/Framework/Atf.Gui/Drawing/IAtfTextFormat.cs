@@ -10,6 +10,30 @@ namespace Sce.Atf.Drawing
     /// and it describes locale information</summary>
     public interface IAtfTextFormat : IDisposable
     {
+        /// <summary>
+        /// Gets the font family name
+        /// </summary>
+        string FontFamilyName
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the font size in DIP (Device Independent Pixels) units
+        /// </summary>
+        float FontSize
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets the height of the font
+        /// </summary>
+        float FontHeight
+        {
+            get;
+        }
+
         //TODO
 
         /// <summary>

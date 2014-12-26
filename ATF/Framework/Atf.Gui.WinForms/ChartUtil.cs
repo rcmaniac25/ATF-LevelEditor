@@ -3,7 +3,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 
 namespace Sce.Atf
 {
@@ -53,7 +53,7 @@ namespace Sce.Atf
           RectangleF graphRect,
           double step,
           Color color,
-          D2dGraphics g)
+          IAtfGraphics g)
         {
             double yScale = transform.Elements[3];
             RectangleF clientRect = GdiUtil.Transform(transform, graphRect);
@@ -112,7 +112,7 @@ namespace Sce.Atf
             RectangleF graphRect,
             double step,
             Color color,
-            D2dGraphics g)
+            IAtfGraphics g)
         {
             double xScale = transform.Elements[0];
             RectangleF clientRect = GdiUtil.Transform(transform, graphRect);
@@ -194,8 +194,8 @@ namespace Sce.Atf
 
             double min = Math.Min(graphRect.Top, graphRect.Bottom);
             double max = Math.Max(graphRect.Top, graphRect.Bottom);
-            double tickAnchor = D2dUtil.CalculateTickAnchor(min, max);
-            double step = D2dUtil.CalculateStep(min, max, Math.Abs(clientRect.Bottom - clientRect.Top), majorSpacing, 0.0);
+            double tickAnchor = AtfDrawingUtil.CalculateTickAnchor(min, max);
+            double step = AtfDrawingUtil.CalculateStep(min, max, Math.Abs(clientRect.Bottom - clientRect.Top), majorSpacing, 0.0);
             if (step > 0)
             {
                 double offset = tickAnchor - min;
@@ -232,8 +232,8 @@ namespace Sce.Atf
 
             double min = Math.Min(graphRect.Left, graphRect.Right);
             double max = Math.Max(graphRect.Left, graphRect.Right);
-            double tickAnchor = D2dUtil.CalculateTickAnchor(min, max);
-            double step = D2dUtil.CalculateStep(min, max, Math.Abs(clientRect.Right - clientRect.Left), majorSpacing, 0.0);
+            double tickAnchor = AtfDrawingUtil.CalculateTickAnchor(min, max);
+            double step = AtfDrawingUtil.CalculateStep(min, max, Math.Abs(clientRect.Right - clientRect.Left), majorSpacing, 0.0);
             if (step > 0)
             {
                 double offset = tickAnchor - min;
@@ -292,10 +292,10 @@ namespace Sce.Atf
             double min = Math.Min(graphRect.Left, graphRect.Right);
             double max = Math.Max(graphRect.Left, graphRect.Right);
 
-            double tickAnchor = D2dUtil.CalculateTickAnchor(min, max);
-            double majorGraphStep = D2dUtil.CalculateStep(
+            double tickAnchor = AtfDrawingUtil.CalculateTickAnchor(min, max);
+            double majorGraphStep = AtfDrawingUtil.CalculateStep(
                 min, max, Math.Abs(clientRect.Right - clientRect.Left), majorSpacing, minimumGraphStep);
-            int numMinorTicks = D2dUtil.CalculateNumMinorTicks(majorGraphStep, minimumGraphStep, 5);
+            int numMinorTicks = AtfDrawingUtil.CalculateNumMinorTicks(majorGraphStep, minimumGraphStep, 5);
             double cMinorStep = (majorGraphStep / numMinorTicks) * xScale;
             if (majorGraphStep > 0)
             {
@@ -383,10 +383,10 @@ namespace Sce.Atf
             double min = Math.Min(graphRect.Top, graphRect.Bottom);
             double max = Math.Max(graphRect.Top, graphRect.Bottom);
 
-            double tickAnchor = D2dUtil.CalculateTickAnchor(min, max);
-            double majorGraphStep = D2dUtil.CalculateStep(
+            double tickAnchor = AtfDrawingUtil.CalculateTickAnchor(min, max);
+            double majorGraphStep = AtfDrawingUtil.CalculateStep(
                 min, max, Math.Abs(clientRect.Bottom - clientRect.Top), majorSpacing, minimumGraphStep);
-            int numMinorTicks = D2dUtil.CalculateNumMinorTicks(majorGraphStep, minimumGraphStep, 5);
+            int numMinorTicks = AtfDrawingUtil.CalculateNumMinorTicks(majorGraphStep, minimumGraphStep, 5);
             double cMinorStep = (majorGraphStep / numMinorTicks) * yScale;
             if (majorGraphStep > 0)
             {
