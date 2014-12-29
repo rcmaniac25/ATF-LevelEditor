@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Sce.Atf.Adaptation;
 using Sce.Atf.Applications;
 using Sce.Atf.VectorMath;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 
 namespace Sce.Atf.Controls.Adaptable.Graphs
 {
@@ -21,7 +21,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
     /// <typeparam name="TEdgeRoute">Edge route type, must implement IEdgeRoute</typeparam>
     /// <remark>ControlAdapter accesses AdaptableControl, which is a Form's control, hence any class derived from ControlAdapter
     /// belongs to Atf.Gui.WinForms project</remark>    
-    public class D2dGraphAdapter<TNode, TEdge, TEdgeRoute> : ControlAdapter, IPickingAdapter2, IDisposable        
+    public class AtfDrawingGraphAdapter<TNode, TEdge, TEdgeRoute> : ControlAdapter, IPickingAdapter2, IDisposable        
         where TNode : class, IGraphNode
         where TEdge : class, IGraphEdge<TNode, TEdgeRoute>
         where TEdgeRoute : class, IEdgeRoute
@@ -30,7 +30,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// Constructor</summary>        
         /// <param name="renderer">Graph renderer to draw and hit-test graph</param>
         /// <param name="transformAdapter">Transform adapter</param>
-        public D2dGraphAdapter(D2dGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
+        public AtfDrawingGraphAdapter(AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
             ITransformAdapter transformAdapter)
         {            
             m_renderer = renderer;
@@ -75,7 +75,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
 
         /// <summary>
         /// Gets the renderer for the adapter</summary>
-        public D2dGraphRenderer<TNode, TEdge, TEdgeRoute> Renderer
+        public AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> Renderer
         {
             get { return m_renderer; }
         }
@@ -191,7 +191,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         public virtual IEnumerable<object> Pick(Rectangle pickRect)
         {
             Matrix3x2F invXform = Matrix3x2F.Invert(m_d2dGraphics.Transform);
-            RectangleF rect = D2dUtil.Transform(invXform,pickRect);
+            RectangleF rect = AtfDrawingUtil.Transform(invXform,pickRect);
             return m_renderer.Pick(m_graph, rect, m_d2dGraphics);           
         }
 
@@ -202,7 +202,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         public virtual Rectangle GetBounds(IEnumerable<object> items)
         {
             RectangleF bounds = m_renderer.GetBounds(items.AsIEnumerable<TNode>(), m_d2dGraphics);
-            bounds = D2dUtil.Transform(m_d2dGraphics.Transform, bounds); 
+            bounds = AtfDrawingUtil.Transform(m_d2dGraphics.Transform, bounds); 
             return Rectangle.Truncate(bounds);
         }
 
@@ -267,15 +267,15 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         #endregion
 
         /// <summary>
-        /// Gets the D2D adaptable control that we are currently bound to, or null</summary>
-        protected D2dAdaptableControl D2DAdaptableControl
+        /// Gets the ATF Drawing adaptable control that we are currently bound to, or null</summary>
+        protected AtfDrawingAdaptableControl D2DAdaptableControl
         {
             get { return m_d2dControl; }
         }
 
         /// <summary>
-        /// Gets the current D2dGraphics object of the D2dAdaptableControl that we are bound to, or null</summary>
-        protected D2dGraphics D2dGraphics
+        /// Gets the current IAtfGraphics object of the AtfDrawingAdaptableControl that we are bound to, or null</summary>
+        protected IAtfGraphics D2dGraphics
         {
             get { return m_d2dGraphics; }
         }
@@ -301,8 +301,8 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         protected override void Bind(AdaptableControl control)
         {
             if (m_d2dControl != null)
-                throw new InvalidOperationException("We can only bind to one D2dAdaptableControl at a time");
-            m_d2dControl = (D2dAdaptableControl)control;
+                throw new InvalidOperationException("We can only bind to one AtfDrawingAdaptableControl at a time");
+            m_d2dControl = (AtfDrawingAdaptableControl)control;
             m_d2dGraphics = m_d2dControl.D2dGraphics;
             m_d2dControl.ContextChanged += control_ContextChanged;
             m_d2dControl.DrawingD2d += control_Paint;
@@ -334,7 +334,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// Renders entire graph</summary>
         protected virtual void OnRender()
         {
-            m_d2dGraphics.AntialiasMode = D2dAntialiasMode.PerPrimitive;
+            m_d2dGraphics.AntialiasMode = AtfDrawingAntialiasMode.PerPrimitive;
             Matrix3x2F invMtrx = m_d2dGraphics.Transform;
             invMtrx.Invert();
             RectangleF boundsGr = Matrix3x2F.Transform(invMtrx, this.AdaptedControl.ClientRectangle);
@@ -615,7 +615,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
 
         private void Invalidate()
         {
-            var d2dControl = this.AdaptedControl as D2dAdaptableControl;
+            var d2dControl = this.AdaptedControl as AtfDrawingAdaptableControl;
             if (d2dControl != null)
                 d2dControl.Invalidate();
         }
@@ -645,9 +645,9 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
             m_renderer.ClearCustomStyle(item);
         }
 
-        private D2dAdaptableControl m_d2dControl;
-        private D2dGraphics m_d2dGraphics;
-        private readonly D2dGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
+        private AtfDrawingAdaptableControl m_d2dControl;
+        private IAtfGraphics m_d2dGraphics;
+        private readonly AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
         private readonly ITransformAdapter m_transformAdapter;
         private object m_hoverObject;
         private object m_hoverSubObject;

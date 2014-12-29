@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Forms;
 
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 using Sce.Atf.VectorMath;
 
 namespace Sce.Atf.Controls.Adaptable
@@ -11,11 +11,11 @@ namespace Sce.Atf.Controls.Adaptable
     /// <summary>
     /// Adaptable control, a control with adapters (decorators). The adaptable control
     /// can be converted into any of its adapters using the IAdaptable.As method.</summary>
-    public class D2dAdaptableControl : AdaptableControl, IPerformanceTarget
+    public class AtfDrawingAdaptableControl : AdaptableControl, IPerformanceTarget
     {
         /// <summary>
         /// Constructor</summary>
-        public D2dAdaptableControl()
+        public AtfDrawingAdaptableControl()
         {
             DoubleBuffered = false;
             SetStyle(
@@ -24,15 +24,15 @@ namespace Sce.Atf.Controls.Adaptable
                ControlStyles.Opaque |
                ControlStyles.UserPaint, true);
 
-            // D2dHwndGraphics needs to be resized on size changed. Look at OnResize.
-            m_d2dGraphics = D2dFactory.CreateD2dHwndGraphics(Handle);
+            // IAtfHwndGraphics needs to be resized on size changed. Look at OnResize.
+            m_Graphics = AtfDrawingFactory.CreateHwndGraphics(Handle);
         }
 
         /// <summary>
-        /// Gets the Direct2D graphics device associated with this Control</summary>
-        public D2dGraphics D2dGraphics
+        /// Gets the graphics device associated with this Control</summary>
+        public IAtfGraphics D2dGraphics //XXX Needs to be renamed
         {
-            get { return m_d2dGraphics; }
+            get { return m_Graphics; }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Sce.Atf.Controls.Adaptable
         /// <summary>
         /// Draws one complete 'frame' using Direct2D. Is equivalent to this Control receiving a Paint message.
         /// Raises the DrawingD2d event.</summary>
-        public void DrawD2d()
+        public void DrawD2d() //XXX Needs to be renamed
         {
             if (SuppressDraw)
                 return;
@@ -67,25 +67,25 @@ namespace Sce.Atf.Controls.Adaptable
         /// <summary>
         /// Called to prepare the Direct2D graphics device for drawing, including clearing the back buffer
         /// render target and initializing the Transform property of the D2dGraphics instance.</summary>
-        protected virtual void OnBeginDrawD2d()
+        protected virtual void OnBeginDrawD2d() //XXX Needs to be renamed
         {
             D2dGraphics.BeginDraw();
             ITransformAdapter xform = this.As<ITransformAdapter>();
             D2dGraphics.Transform = xform == null ? Matrix3x2F.Identity : xform.Transform;
             D2dGraphics.Clear(BackColor);
-            D2dGraphics.AntialiasMode = D2dAntialiasMode.Aliased;
+            D2dGraphics.AntialiasMode = AtfDrawingAntialiasMode.Aliased;
         }
 
         /// <summary>
         /// Does the DrawingD2d drawing. Raises the DrawingD2d event.</summary>
-        protected virtual void OnDrawingD2d()
+        protected virtual void OnDrawingD2d() //XXX Needs to be renamed
         {
             DrawingD2d.Raise(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Ends drawing the current frame to the Direct2D back buffer render target</summary>
-        protected virtual void OnEndDrawD2d()
+        protected virtual void OnEndDrawD2d() //XXX Needs to be renamed
         {
             D2dGraphics.EndDraw();
         }
@@ -112,7 +112,7 @@ namespace Sce.Atf.Controls.Adaptable
         {
             // Resize backbuffer to match control's client size.
             // Resize before calling base implementation.
-            m_d2dGraphics.Resize(ClientSize);
+            m_Graphics.Resize(ClientSize);
 
             base.OnResize(e);
         }
@@ -125,7 +125,7 @@ namespace Sce.Atf.Controls.Adaptable
         {
             if (disposing)
             {
-                m_d2dGraphics.Dispose();
+                m_Graphics.Dispose();
             }
 
             base.Dispose(disposing);
@@ -156,6 +156,6 @@ namespace Sce.Atf.Controls.Adaptable
 
         #endregion
 
-        private readonly D2dHwndGraphics m_d2dGraphics;
+        private readonly IAtfHwndGraphics m_Graphics;
     }
 }

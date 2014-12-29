@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Sce.Atf.Adaptation;
-using Sce.Atf.Direct2D;
+using Sce.Atf.Drawing;
 
 namespace Sce.Atf.Controls.Adaptable.Graphs
 {
@@ -15,7 +15,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
     /// <typeparam name="TNode">Node type, must implement IGraphNode</typeparam>
     /// <typeparam name="TEdge">Edge type, must implement IGraphEdge</typeparam>
     /// <typeparam name="TEdgeRoute">Edge route type, must implement IEdgeRoute</typeparam>
-    public class D2dGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> : DraggingControlAdapter
+    public class AtfDrawingGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> : DraggingControlAdapter
         where TNode : class, IGraphNode
         where TEdge : class, IGraphEdge<TNode, TEdgeRoute>
         where TEdgeRoute : class, IEdgeRoute
@@ -25,9 +25,9 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// <param name="renderer">Graph renderer</param>
         /// <param name="graphAdapter">Graph adapter</param>
         /// <param name="transformAdapter">Transform adapter</param>
-        public D2dGraphEdgeEditAdapter(
-            D2dGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
-            D2dGraphAdapter<TNode, TEdge, TEdgeRoute> graphAdapter,
+        public AtfDrawingGraphEdgeEditAdapter(
+            AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
+            AtfDrawingGraphAdapter<TNode, TEdge, TEdgeRoute> graphAdapter,
             ITransformAdapter transformAdapter)
         {
             m_renderer = renderer;
@@ -81,7 +81,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
             /// <summary>
             /// Constructor</summary>
             /// <param name="edgeEditAdapter">D2dGraphEdgeEditAdapter object</param>
-            public EdgeDraggingContext(D2dGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> edgeEditAdapter)
+            public EdgeDraggingContext(AtfDrawingGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> edgeEditAdapter)
             {
                 m_edgeEditAdapter = edgeEditAdapter;
             }
@@ -231,7 +231,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
                 return null;
             }
 
-            private D2dGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> m_edgeEditAdapter;
+            private AtfDrawingGraphEdgeEditAdapter<TNode, TEdge, TEdgeRoute> m_edgeEditAdapter;
 
         };
 
@@ -256,7 +256,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         {
             m_autoTranslateAdapter = control.As<IAutoTranslateAdapter>();
 
-            var d2dControl = control as D2dAdaptableControl;
+            var d2dControl = control as AtfDrawingAdaptableControl;
             d2dControl.ContextChanged += control_ContextChanged;
             d2dControl.DrawingD2d += control_Paint;
             base.Bind(control);
@@ -267,7 +267,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// <param name="control">Adaptable control</param>
         protected override void Unbind(AdaptableControl control)
         {
-            var d2dControl = control as D2dAdaptableControl;
+            var d2dControl = control as AtfDrawingAdaptableControl;
             d2dControl.ContextChanged -= control_ContextChanged;
             d2dControl.DrawingD2d -= control_Paint;
 
@@ -293,8 +293,8 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
             if (!m_isConnecting)
                 return;
 
-            var d2dControl = this.AdaptedControl as D2dAdaptableControl;
-            D2dGraphics gfx = d2dControl.D2dGraphics;
+            var d2dControl = this.AdaptedControl as AtfDrawingAdaptableControl;
+            IAtfGraphics gfx = d2dControl.D2dGraphics;
 
             string label = m_draggingContext.ExistingEdge != null ? m_draggingContext.ExistingEdge.Label : null;
 
@@ -558,7 +558,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
                             AdaptedControl.Capture = true;
                             if (startNode != null)
                             {
-                                var info = new D2dGraphRenderer<TNode, TEdge, TEdgeRoute>.RouteConnectingInfo()
+                                var info = new AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute>.RouteConnectingInfo()
                                 {
                                     EditableGraph = DraggingContext.EditableGraph,
                                     StartNode = startNode,
@@ -622,7 +622,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
 
                 AdaptedControl.AutoResetCursor = false;
                 AdaptedControl.Cursor = cursor;
-                var d2dControl = this.AdaptedControl as D2dAdaptableControl;
+                var d2dControl = this.AdaptedControl as AtfDrawingAdaptableControl;
                 d2dControl.DrawD2d();
             }
         }
@@ -808,8 +808,8 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
             return null;
         }
 
-        private readonly D2dGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
-        private readonly D2dGraphAdapter<TNode, TEdge, TEdgeRoute> m_graphAdapter;
+        private readonly AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
+        private readonly AtfDrawingGraphAdapter<TNode, TEdge, TEdgeRoute> m_graphAdapter;
         private IAutoTranslateAdapter m_autoTranslateAdapter;
 
         private IGraph<TNode, TEdge, TEdgeRoute> m_mainGraph;

@@ -15,10 +15,7 @@ namespace Sce.Atf.Drawing
         /// Gets text that is formatted using this object</summary>
         /// <remarks>This property cannot be set. A new instance of 
         /// IAtfTextFormat must be created per unique string.</remarks>
-        string Text
-        {
-            get;
-        }
+        string Text { get; }
 
         /// <summary>    
         /// Sets strikethrough for text within a specified text range</summary>    
@@ -38,21 +35,24 @@ namespace Sce.Atf.Drawing
 
         /// <summary>
         /// Gets or sets layout width</summary>
-        float LayoutWidth
-        {
-            get;
-            set;
-        }
+        float LayoutWidth { get; set; }
 
         /// <summary>
         /// Gets or sets layout height</summary>
-        float LayoutHeight
-        {
-            get;
-            set;
-        }
+        float LayoutHeight { get; set; }
 
-        //TODO
+        /// <summary>
+        /// Gets width of the formatted text, while ignoring trailing whitespace at the end of each line</summary>
+        float Width { get; }
+
+        /// <summary>
+        /// Gets height of the formatted text</summary>
+        /// <remarks>The height of an empty string is set to the same value as that of the default font.</remarks>
+        float Height { get; }
+
+        /// <summary>
+        /// Gets total number of lines</summary>
+        int LineCount { get; }
 
         /// <summary>
         /// The application calls this function passing in a specific pixel location relative to the top-left location 
@@ -97,7 +97,5 @@ namespace Sce.Atf.Drawing
         /// Retrieves logical properties and measurements of each glyph cluster</summary>
         /// <returns>Metrics, such as line-break or total advance width, for a glyph cluster</returns>
         ClusterMetrics[] GetClusterMetrics();
-
-        //TODO
     }
 }

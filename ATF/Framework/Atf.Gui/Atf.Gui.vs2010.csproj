@@ -170,7 +170,7 @@
     <Compile Include="Collections\PriorityQueue.cs" />
     <Compile Include="Collections\ReferenceCollectionAdapter.cs" />
     <Compile Include="Collections\SortedObservableCollection.cs" />
-    <Compile Include="Controls\Adaptable\AtfDiagramTheme.cs" />
+    <Compile Include="Controls\Adaptable\AtfDrawingDiagramTheme.cs" />
     <Compile Include="Controls\Adaptable\DiagramBorder.cs" />
     <Compile Include="Controls\Adaptable\DiagramDrawingStyle.cs" />
     <Compile Include="Controls\Adaptable\DiagramHitEventArgs.cs" />
@@ -313,11 +313,18 @@
     <Compile Include="Dom\TemplateFolder.cs" />
     <Compile Include="Drawing\AtfDrawingFactory.cs" />
     <Compile Include="Drawing\AtfDrawingResource.cs" />
+    <Compile Include="Drawing\AtfDrawingShapes.cs" />
     <Compile Include="Drawing\AtfDrawingUtil.cs" />
     <Compile Include="Drawing\IAtfBitmap.cs" />
+    <Compile Include="Drawing\IAtfBitmapBrush.cs" />
+    <Compile Include="Drawing\IAtfBitmapGraphics.cs" />
     <Compile Include="Drawing\IAtfBrush.cs" />
+    <Compile Include="Drawing\IAtfGeometry.cs" />
+    <Compile Include="Drawing\IAtfGeometrySink.cs" />
     <Compile Include="Drawing\IAtfGraphics.cs" />
+    <Compile Include="Drawing\IAtfHwndGraphics.cs" />
     <Compile Include="Drawing\IAtfLinearGradientBrush.cs" />
+    <Compile Include="Drawing\IAtfRadialGradientBrush.cs" />
     <Compile Include="Drawing\IAtfResource.cs" />
     <Compile Include="Drawing\IAtfSolidColorBrush.cs" />
     <Compile Include="Drawing\IAtfStrokeStyle.cs" />

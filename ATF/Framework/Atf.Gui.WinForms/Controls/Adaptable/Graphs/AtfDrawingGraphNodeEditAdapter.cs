@@ -20,7 +20,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
     /// <typeparam name="TNode">Node type, must implement IGraphNode</typeparam>
     /// <typeparam name="TEdge">Edge type, must implement IGraphEdge</typeparam>
     /// <typeparam name="TEdgeRoute">Edge route type, must implement IEdgeRoute</typeparam>
-    public class D2dGraphNodeEditAdapter<TNode, TEdge, TEdgeRoute> : DraggingControlAdapter, IItemDragAdapter
+    public class AtfDrawingGraphNodeEditAdapter<TNode, TEdge, TEdgeRoute> : DraggingControlAdapter, IItemDragAdapter
         where TNode : class, IGraphNode
         where TEdge : class, IGraphEdge<TNode, TEdgeRoute>
         where TEdgeRoute : class, IEdgeRoute
@@ -30,9 +30,9 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// <param name="renderer">Graph renderer</param>
         /// <param name="graphAdapter">Graph adapter</param>
         /// <param name="transformAdapter">Transform adapter</param>
-        public D2dGraphNodeEditAdapter(
-            D2dGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
-            D2dGraphAdapter<TNode, TEdge, TEdgeRoute> graphAdapter,
+        public AtfDrawingGraphNodeEditAdapter(
+            AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> renderer,
+            AtfDrawingGraphAdapter<TNode, TEdge, TEdgeRoute> graphAdapter,
             ITransformAdapter transformAdapter)
         {            
             m_renderer = renderer;
@@ -308,7 +308,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
                     }
                 }
 
-                var d2dControl = this.AdaptedControl as D2dAdaptableControl;
+                var d2dControl = this.AdaptedControl as AtfDrawingAdaptableControl;
                 Point currentPoint = GdiUtil.InverseTransform(m_transformAdapter.Transform, CurrentPoint);
                 // Calculate the delta in world coordinates.
                 Point delta = new Point(currentPoint.X - m_firstPoint.X, currentPoint.Y - m_firstPoint.Y);
@@ -560,9 +560,9 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         {
             m_renderer.ClearCustomStyle(item);
         }
-        
-        private readonly D2dGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
-        private readonly D2dGraphAdapter<TNode, TEdge, TEdgeRoute> m_graphAdapter;
+
+        private readonly AtfDrawingGraphRenderer<TNode, TEdge, TEdgeRoute> m_renderer;
+        private readonly AtfDrawingGraphAdapter<TNode, TEdge, TEdgeRoute> m_graphAdapter;
         private readonly ITransformAdapter m_transformAdapter;
         private IAutoTranslateAdapter m_autoTranslateAdapter;
         private ISelectionPathProvider m_selectionPathProvider;

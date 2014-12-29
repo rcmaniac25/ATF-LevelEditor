@@ -19,7 +19,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         /// Gets the bounding rectangle for the node in world space (or local space if a
         /// hierarchy is involved, as with sub-circuits). The location portion should always
         /// be accurate, but the renderer should be queried for the size of the rectangle.
-        /// See D2dGraphRenderer.GetBounds() or use ILayoutContext.GetBounds().</summary>
+        /// See AtfDrawingGraphRenderer.GetBounds() or use ILayoutContext.GetBounds().</summary>
         Rectangle Bounds
         {
             get;

@@ -48,7 +48,7 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
                 if (m_control != null)
                 {
                     m_layoutConstraints = m_control.AsAll<ILayoutConstraint>();
-                    m_moduleEditAdapter = m_control.As<D2dGraphNodeEditAdapter<Element, Wire, ICircuitPin>>();
+                    m_moduleEditAdapter = m_control.As<AtfDrawingGraphNodeEditAdapter<Element, Wire, ICircuitPin>>();
                     m_control.SizeChanged += new EventHandler(control_SizeChanged);
                     m_control.VisibleChanged += new EventHandler(control_VisibleChanged);
 
@@ -368,6 +368,6 @@ namespace Sce.Atf.Controls.Adaptable.Graphs
         private ICircuitContainer m_graphContainer;
         private AdaptableControl m_control;
         private IEnumerable<ILayoutConstraint> m_layoutConstraints;
-        private D2dGraphNodeEditAdapter<Element, Wire, ICircuitPin> m_moduleEditAdapter;
+        private AtfDrawingGraphNodeEditAdapter<Element, Wire, ICircuitPin> m_moduleEditAdapter;
     }
 }

@@ -220,6 +220,9 @@
     </Compile>
     <Compile Include="Controls\Adaptable\AnnotatingCommands.cs" />
     <Compile Include="Controls\Adaptable\AnnotationAdapter.cs" />
+    <Compile Include="Controls\Adaptable\AtfDrawingAdaptableControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Adaptable\AutoTranslateAdapter.cs" />
     <Compile Include="Controls\Adaptable\CanvasAdapter.cs" />
     <Compile Include="Controls\Adaptable\ContextMenuAdapter.cs" />
@@ -234,6 +237,9 @@
     <Compile Include="Controls\Adaptable\DraggingControlAdapter.cs" />
     <Compile Include="Controls\Adaptable\DragSelectionEventArgs.cs" />
     <Compile Include="Controls\Adaptable\Graphs\AtfDrawingCircuitRenderer.cs" />
+    <Compile Include="Controls\Adaptable\Graphs\AtfDrawingGraphAdapter.cs" />
+    <Compile Include="Controls\Adaptable\Graphs\AtfDrawingGraphEdgeEditAdapter.cs" />
+    <Compile Include="Controls\Adaptable\Graphs\AtfDrawingGraphNodeEditAdapter.cs" />
     <Compile Include="Controls\Adaptable\Graphs\CircuitRenderer.cs" />
     <Compile Include="Controls\Adaptable\Graphs\Circuit\CircuitControlRegistry.cs" />
     <Compile Include="Controls\Adaptable\Graphs\Circuit\CircuitDocument.cs" />

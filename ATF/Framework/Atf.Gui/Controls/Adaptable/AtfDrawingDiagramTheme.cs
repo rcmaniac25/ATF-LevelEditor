@@ -1,5 +1,4 @@
 ﻿//Copyright © 2014 Sony Computer Entertainment America LLC. See License.txt.
-//Copyright © 2014 Vincent Simonetti
 
 using System;
 using System.Collections.Generic;
@@ -12,12 +11,12 @@ namespace Sce.Atf.Controls.Adaptable
     /// <summary>
     /// Diagram rendering theme class
     /// </summary>
-    public class AtfDiagramTheme : AtfDrawingResource
+    public class AtfDrawingDiagramTheme : AtfDrawingResource
     {
         /// <summary>
         /// Constructor with no parameters
         /// </summary>
-        public AtfDiagramTheme()
+        public AtfDrawingDiagramTheme()
             : this("Microsoft Sans Serif", 10)
         {
 
@@ -28,9 +27,9 @@ namespace Sce.Atf.Controls.Adaptable
         /// </summary>
         /// <param name="fontFamilyName">Font family name for theme</param>
         /// <param name="fontSize">Font size</param>
-        public AtfDiagramTheme(string fontFamilyName, float fontSize)
+        public AtfDrawingDiagramTheme(string fontFamilyName, float fontSize)
         {
-            m_d2dTextFormat = AtfDrawingFactory.CreateTextFormat(fontFamilyName, fontSize);
+            m_atfTextFormat = AtfDrawingFactory.CreateTextFormat(fontFamilyName, fontSize);
             m_fillBrush = AtfDrawingFactory.CreateSolidBrush(SystemColors.Window);
             m_fillTitleBrush = AtfDrawingFactory.CreateSolidBrush(Color.YellowGreen);
             m_textBrush = AtfDrawingFactory.CreateSolidBrush(SystemColors.WindowText);
@@ -53,10 +52,10 @@ namespace Sce.Atf.Controls.Adaptable
             m_rowSpacing = fontHeight + PinMargin;
             m_pinOffset = (fontHeight - m_pinSize) / 2;
 
-            AtfGraphicsGradientStop[] gradstops = 
+            AtfDrawingGradientStop[] gradstops = 
             { 
-                new AtfGraphicsGradientStop(Color.White, 0),
-                new AtfGraphicsGradientStop(Color.LightSteelBlue, 1.0f),
+                new AtfDrawingGradientStop(Color.White, 0),
+                new AtfDrawingGradientStop(Color.LightSteelBlue, 1.0f),
             };
             m_fillLinearGradientBrush = AtfDrawingFactory.CreateLinearGradientBrush(gradstops);
             StrokeWidth = 2;
@@ -153,8 +152,8 @@ namespace Sce.Atf.Controls.Adaptable
         /// Gets or sets the diagram text format</summary>
         public IAtfTextFormat TextFormat
         {
-            get { return m_d2dTextFormat; }
-            set { SetDisposableField(value, ref m_d2dTextFormat); }
+            get { return m_atfTextFormat; }
+            set { SetDisposableField(value, ref m_atfTextFormat); }
         }
 
         /// <summary>
@@ -339,7 +338,7 @@ namespace Sce.Atf.Controls.Adaptable
                 m_fillBrush.Dispose();
                 m_fillTitleBrush.Dispose();
                 m_textBrush.Dispose();
-                m_d2dTextFormat.Dispose();
+                m_atfTextFormat.Dispose();
                 m_highlightBrush.Dispose();
                 m_lastHighlightBrush.Dispose();
                 m_ghostBrush.Dispose();
@@ -420,7 +419,7 @@ namespace Sce.Atf.Controls.Adaptable
 
         private readonly Dictionary<object, IAtfBrush> m_brushes = new Dictionary<object, IAtfBrush>();
         private readonly Dictionary<object, IAtfBitmap> m_bitmaps = new Dictionary<object, IAtfBitmap>();
-        private IAtfTextFormat m_d2dTextFormat;
+        private IAtfTextFormat m_atfTextFormat;
         private IAtfBrush m_fillBrush;
         private IAtfBrush m_fillTitleBrush;
         private IAtfBrush m_textBrush;
